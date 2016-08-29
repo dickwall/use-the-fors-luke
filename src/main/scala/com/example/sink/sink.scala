@@ -1,6 +1,8 @@
 package com.example.sink
 
-trait Sink[To] {
+trait Sink[To] { sink =>
   def apply(t: To): Unit
-  def stage[E]: StagedSink[E, E, To] = ???
+  final def stage[E]: StagedSink[E, E, To] = StagedSink(StagedSink.stagedIdentity[E], this)
 }
+
+
